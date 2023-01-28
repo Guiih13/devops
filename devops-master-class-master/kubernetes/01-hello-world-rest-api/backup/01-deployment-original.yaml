@@ -2,16 +2,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    deployment.kubernetes.io/revision: "4"
-  creationTimestamp: "2020-01-28T12:40:25Z"
-  generation: 5
+    deployment.kubernetes.io/revision: "3"
+  creationTimestamp: "2023-01-28T15:35:37Z"
+  generation: 4
   labels:
     app: hello-world-rest-api
   name: hello-world-rest-api
   namespace: default
-  resourceVersion: "4926"
-  selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/hello-world-rest-api
-  uid: 5b515896-41cb-11ea-8e69-42010a80009c
+  resourceVersion: "13848"
+  uid: b18d5e00-4f6c-4e1f-a7cd-3bb0cce5aec6
 spec:
   progressDeadlineSeconds: 600
   replicas: 2
@@ -45,19 +44,19 @@ spec:
 status:
   availableReplicas: 3
   conditions:
-  - lastTransitionTime: "2020-01-28T12:41:15Z"
-    lastUpdateTime: "2020-01-28T12:41:15Z"
+  - lastTransitionTime: "2023-01-28T15:35:37Z"
+    lastUpdateTime: "2023-01-28T15:41:23Z"
+    message: ReplicaSet "hello-world-rest-api-569c4879d9" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2023-01-28T15:45:01Z"
+    lastUpdateTime: "2023-01-28T15:45:01Z"
     message: Deployment has minimum availability.
     reason: MinimumReplicasAvailable
     status: "True"
     type: Available
-  - lastTransitionTime: "2020-01-28T12:40:25Z"
-    lastUpdateTime: "2020-01-28T12:57:52Z"
-    message: ReplicaSet "hello-world-rest-api-58ff5dd898" has successfully progressed.
-    reason: NewReplicaSetAvailable
-    status: "True"
-    type: Progressing
-  observedGeneration: 5
+  observedGeneration: 4
   readyReplicas: 3
   replicas: 3
   updatedReplicas: 3
@@ -65,19 +64,29 @@ status:
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: "2020-01-28T12:40:28Z"
+  annotations:
+    cloud.google.com/neg: '{"ingress":true}'
+  creationTimestamp: "2023-01-28T15:36:22Z"
+  finalizers:
+  - service.kubernetes.io/load-balancer-cleanup
   labels:
     app: hello-world-rest-api
   name: hello-world-rest-api
   namespace: default
-  resourceVersion: "1250"
-  selfLink: /api/v1/namespaces/default/services/hello-world-rest-api
-  uid: 5d6a09ca-41cb-11ea-8e69-42010a80009c
+  resourceVersion: "9797"
+  uid: ad796724-814e-49f2-9c9a-a76aac3d435b
 spec:
-  clusterIP: 10.0.8.24
+  allocateLoadBalancerNodePorts: true
+  clusterIP: 10.44.10.68
+  clusterIPs:
+  - 10.44.10.68
   externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
   ports:
-  - nodePort: 32208
+  - nodePort: 32751
     port: 8080
     protocol: TCP
     targetPort: 8080
@@ -88,4 +97,4 @@ spec:
 status:
   loadBalancer:
     ingress:
-    - ip: 35.193.152.162
+    - ip: 34.123.240.5
